@@ -1448,3 +1448,147 @@ body.menu-open .mobile-menu { opacity: 1; visibility: visible; }
   0%, 100% { opacity: 0.6; }
   50% { opacity: 0.3; }
 }
+/* ==========================================================================
+   Google Location Section
+   ========================================================================== */
+.google-location {
+  background: var(--off-white);
+  padding: 80px 0;
+}
+.google-location__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .google-location__grid {
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+  }
+}
+.google-location__map-col {
+  display: flex;
+  flex-direction: column;
+}
+.google-location__address {
+  font-style: normal;
+  font-size: 1.125rem;
+  color: var(--primary-navy);
+  margin-bottom: 24px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.google-location__map-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 300px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(7, 26, 43, 0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.google-location__iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.google-location__btn {
+  align-self: flex-start;
+}
+.google-location__reviews-col {
+  display: flex;
+  justify-content: center;
+}
+.google-location__reviews-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 12px 48px rgba(7, 26, 43, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+.google-location__google-logo {
+  margin-bottom: 24px;
+}
+.google-location__reviews-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--primary-navy);
+  margin-bottom: 16px;
+}
+.google-location__stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.google-location__score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 8px;
+}
+.google-location__based-on {
+  color: var(--muted-grey);
+  margin-bottom: 32px;
+}
+.google-location__reviews-btn {
+  width: 100%;
+  justify-content: center;
+}
+/* ==========================================================================
+   World Map Animation
+   ========================================================================== */
+.world-map-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.map-tooltip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(7, 26, 43, 0.9);
+  color: var(--white);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 164, 92, 0.3);
+  font-family: var(--font-body);
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.map-tooltip strong {
+  display: block;
+  color: var(--gold);
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+}
+.pulse-circle {
+  animation: pulse-glow 2s infinite;
+}
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 2px var(--gold)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 10px var(--gold)); transform: scale(1.1); }
+  100% { filter: drop-shadow(0 0 2px var(--gold)); transform: scale(1); }
+}
+
+.map-line-anim {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 3s ease-out forwards;
+}
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-circle { animation: none; }
+  .map-line-anim { animation: none; stroke-dashoffset: 0; }
+}

@@ -13,6 +13,7 @@ import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import MobileCTA from './components/MobileCTA';
+import GoogleLocation from './components/GoogleLocation';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <ClaimsProcess />
         <DiplomaticNetworks />
         <QuoteSection />
+        <GoogleLocation />
         <FinalCTA />
       </main>
       <Footer />

@@ -221,6 +221,17 @@ export const translations = {
       text: 'Request a Quote',
     },
 
+    location: {
+      label: 'Location & Reviews',
+      title: 'Visit CARPS International in Paris',
+      address: '168 Rue de Grenelle\n75007 Paris, France',
+      openMap: 'Open in Google Maps',
+      reviewsTitle: 'Google Reviews',
+      score: '5.0 / 5 on Google',
+      basedOn: 'Based on 2 reviews',
+      readReviews: 'Read our Google reviews',
+    },
+
     footer: {
       navigation: 'Navigation',
       resources: 'Resources',
@@ -461,6 +472,17 @@ export const translations = {
 
     mobileCta: {
       text: 'Demander un devis',
+    },
+
+    location: {
+      label: 'Localisation & Avis',
+      title: 'Retrouvez CARPS International à Paris',
+      address: '168 Rue de Grenelle\n75007 Paris, France',
+      openMap: 'Voir sur Google Maps',
+      reviewsTitle: 'Avis Google',
+      score: '5,0 / 5 sur Google',
+      basedOn: 'Basé sur 2 avis',
+      readReviews: 'Voir nos avis Google',
     },
 
     footer: {

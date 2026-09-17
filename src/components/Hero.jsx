@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import QuoteForm from './QuoteForm';
 import heroImage from '../assets/imageye___-_imgi_22_first-img.jpg';
+import heroVideo from '../assets/hero_video.mp4';
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -17,14 +18,20 @@ const Hero = () => {
 
   return (
     <section className={`hero ${revealed ? 'revealed' : ''}`} id="hero" aria-labelledby="hero-heading">
-      <div className="hero__bg" aria-hidden="true" style={{ position: 'absolute', inset: 0 }}>
-        <img 
-          src={heroImage} 
-          alt="" 
-          className="hero__bg-image" 
-          loading="eager" 
-          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.15, mixBlendMode: 'luminosity' }}
-        />
+      <div className="hero__bg" aria-hidden="true" style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+        <video 
+          src={heroVideo}
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          preload="metadata"
+          className="hero__bg-video" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        ></video>
+        {/* Overlay to ensure text readability against video */}
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--primary-navy)', opacity: 0.8, mixBlendMode: 'multiply' }}></div>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(7, 26, 43, 0.4)' }}></div>
       </div>
       
       <div className="hero__container">
