@@ -1,0 +1,155 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/v0-components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+const latestPosts = posts.slice(0, 3);
+---
+
+<Layout title="CARPS INTERNATIONAL IARD | Assurance Auto, Habitation et MRP" description="Des solutions de protection bâties sur 50 ans de confiance. Assurance auto, habitation et multirisque professionnelle (MRP).">
+  
+  <Hero 
+    eyebrow="Depuis 1974"
+    title="Des solutions de protection bâties sur <br/><span class='text-gold'>50 ans de confiance.</span>"
+    description="Particuliers et professionnels, CARPS INTERNATIONAL IARD compare et trouve l'assurance la mieux adaptée à votre situation en toute indépendance."
+    subtitle="L'expertise IARD"
+    bgVideo="/assets/hero_video.mp4"
+    primaryCtaText="Obtenir un Devis Gratuit"
+    primaryCtaLink="/contact"
+    secondaryText="Ou appelez-nous directement"
+  />
+
+  <!-- PRODUITS -->
+  <section id="expertises" class="section-padding bg-corporate-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl text-corporate-dark font-heading font-bold mb-4">Nos Expertises IARD</h2>
+        <p class="text-corporate-gray max-w-2xl mx-auto text-lg">Des contrats sur-mesure pour votre véhicule, votre logement et votre activité professionnelle.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Auto -->
+        <a href="/assurance-auto" class="group bg-white rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full animate-on-scroll" data-delay="0">
+          <div class="h-48 overflow-hidden relative">
+            <img src="/assets/imageye___-_imgi_12_img-01.jpg" alt="Assurance Auto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-corporate-dark/10 group-hover:bg-transparent transition-colors"></div>
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <h3 class="text-2xl font-bold text-corporate-dark mb-3 font-heading group-hover:text-corporate-blue transition-colors">Assurance Auto</h3>
+            <p class="text-corporate-gray flex-grow mb-6">Des solutions performantes pour tous, incluant les jeunes conducteurs et les profils malussés ou résiliés.</p>
+            <span class="text-corporate-blue font-medium inline-flex items-center">
+              Découvrir la couverture <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Habitation -->
+        <a href="/assurance-habitation" class="group bg-white rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full animate-on-scroll" data-delay="100">
+          <div class="h-48 overflow-hidden relative">
+            <img src="/assets/imageye___-_imgi_13_img-03.jpg" alt="Assurance Habitation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-corporate-dark/10 group-hover:bg-transparent transition-colors"></div>
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <h3 class="text-2xl font-bold text-corporate-dark mb-3 font-heading group-hover:text-corporate-blue transition-colors">Assurance Habitation</h3>
+            <p class="text-corporate-gray flex-grow mb-6">Protégez votre toit et vos biens, que vous soyez locataire, propriétaire occupant ou PNO.</p>
+            <span class="text-corporate-blue font-medium inline-flex items-center">
+              Découvrir la couverture <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- MRP -->
+        <a href="/mrp" class="group bg-white rounded-md overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full animate-on-scroll" data-delay="200">
+          <div class="h-48 overflow-hidden relative">
+            <img src="/assets/imageye___-_imgi_22_first-img.jpg" alt="Multirisque Professionnelle" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-corporate-dark/10 group-hover:bg-transparent transition-colors"></div>
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <h3 class="text-2xl font-bold text-corporate-dark mb-3 font-heading group-hover:text-corporate-blue transition-colors">Multirisque Pro (MRP)</h3>
+            <p class="text-corporate-gray flex-grow mb-6">La sécurité globale de vos locaux, matériels et responsabilités pour artisans, commerçants et TPE.</p>
+            <span class="text-corporate-blue font-medium inline-flex items-center">
+              Découvrir la couverture <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/contact" class="btn-primary">Comparer mes contrats dès maintenant</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURQUOI NOUS CHOISIR -->
+  <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl text-corporate-dark font-heading font-bold mb-4">Pourquoi nous choisir ?</h2>
+        <p class="text-corporate-gray max-w-2xl mx-auto text-lg">Plus qu'un simple assureur, nous sommes votre partenaire de confiance.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-corporate-light p-8 rounded-md border border-gray-100 relative">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-corporate-blue text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">1</div>
+          <h3 class="text-xl font-bold text-corporate-dark mt-4 mb-3">Indépendance</h3>
+          <p class="text-corporate-gray">Nous comparons les offres de plus de 30 compagnies partenaires pour vous offrir le meilleur rapport garanties/prix.</p>
+        </div>
+        
+        <div class="bg-corporate-light p-8 rounded-md border border-gray-100 relative">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-corporate-blue text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">2</div>
+          <h3 class="text-xl font-bold text-corporate-dark mt-4 mb-3">Expertise depuis 1974</h3>
+          <p class="text-corporate-gray">Un demi-siècle d'expérience au service de votre protection. Une solidité éprouvée par le temps.</p>
+        </div>
+        
+        <div class="bg-corporate-light p-8 rounded-md border border-gray-100 relative">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-corporate-blue text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">3</div>
+          <h3 class="text-xl font-bold text-corporate-dark mt-4 mb-3">Tous les profils</h3>
+          <p class="text-corporate-gray">Locataires, jeunes conducteurs, malussés ou TPE... Nous avons des solutions pour absolument chaque situation.</p>
+        </div>
+        
+        <div class="bg-corporate-light p-8 rounded-md border border-gray-100 relative">
+          <div class="absolute -top-6 left-8 w-12 h-12 bg-corporate-blue text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg">4</div>
+          <h3 class="text-xl font-bold text-corporate-dark mt-4 mb-3">Service Client Humain</h3>
+          <p class="text-corporate-gray">Une équipe disponible en agence à Paris, ou directement par téléphone et WhatsApp pour un accompagnement fluide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTUALITÉS -->
+  <section class="section-padding bg-corporate-light border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <h2 class="text-3xl text-corporate-dark font-heading font-bold mb-2">Actualités & Conseils</h2>
+          <p class="text-corporate-gray text-lg">Les dernières informations sur l'assurance IARD.</p>
+        </div>
+        <a href="/actualites" class="hidden md:inline-flex items-center text-corporate-blue font-medium hover:text-blue-800 transition-colors">
+          Voir tous les articles
+          <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {latestPosts.map(post => (
+          <a href={`/actualites/` + post.slug} class="bg-white p-6 rounded-md shadow-sm hover:shadow-md transition-shadow border border-gray-100 group">
+            <p class="text-corporate-gray text-sm mb-3">{post.data.date}</p>
+            <h3 class="text-xl font-bold mb-3 text-corporate-dark group-hover:text-corporate-blue transition-colors line-clamp-2">{post.data.title}</h3>
+            <p class="text-gray-600 line-clamp-3">{post.data.description}</p>
+          </a>
+        ))}
+      </div>
+      
+      <div class="mt-8 text-center md:hidden">
+        <a href="/actualites" class="inline-flex items-center text-corporate-blue font-medium hover:text-blue-800 transition-colors">
+          Voir tous les articles
+          <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+

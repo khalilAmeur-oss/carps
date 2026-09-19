@@ -1,0 +1,196 @@
+---
+// src/components/WorldMap.astro
+// Map component using D3.js strictly on client-side for performance
+// We will load d3 and topojson from CDN only when the component is visible (IntersectionObserver)
+---
+
+<div id="map-container" class="w-full relative bg-corporate-light rounded-xl overflow-hidden border border-gray-200 shadow-inner" style="min-height: 400px; aspect-ratio: 2/1;">
+  <div id="map-loading" class="absolute inset-0 flex items-center justify-center text-corporate-gray">
+    Chargement de la carte internationale...
+  </div>
+  <svg id="world-map-svg" class="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet"></svg>
+  
+  <div id="map-tooltip" class="absolute hidden bg-corporate-dark text-white text-sm px-3 py-2 rounded-md shadow-lg pointer-events-none z-10 transition-opacity duration-200 opacity-0 transform -translate-x-1/2 -translate-y-full mt-[-10px]">
+    <div id="map-tooltip-content" class="font-medium text-center"></div>
+    <div class="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-corporate-dark"></div>
+  </div>
+</div>
+
+<!-- Mobile Fallback List -->
+<div class="md:hidden mt-6 bg-white p-4 rounded-xl border border-gray-100 shadow-sm text-left">
+  <h3 class="font-bold text-corporate-dark mb-3">Réseaux diplomatiques majeurs :</h3>
+  <ul class="space-y-2 text-sm text-corporate-gray">
+    <li><strong class="text-corporate-blue">Taïwan</strong> — présent dans 82 pays</li>
+    <li><strong class="text-corporate-blue">Lituanie</strong> — présent dans 37 pays</li>
+    <li><strong class="text-corporate-blue">Lettonie</strong> — présent dans 37 pays</li>
+    <li><strong class="text-corporate-blue">Haïti</strong> — présent dans 16 pays</li>
+    <li><strong class="text-corporate-blue">Mongolie</strong> — présent dans 12 pays</li>
+    <li><strong class="text-corporate-blue">Moldavie</strong> — présent dans 11 pays</li>
+  </ul>
+  <p class="mt-4 text-xs text-gray-500 italic">Et dans plus de 60 autres pays à travers le monde (France, États-Unis, Allemagne, Japon...).</p>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('map-container');
+  if (!container) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      loadMap();
+      observer.disconnect();
+    }
+  }, { rootMargin: '200px' });
+  observer.observe(container);
+});
+
+function loadMap() {
+  // Load dependencies dynamically
+  Promise.all([
+    import('https://cdn.jsdelivr.net/npm/d3@7/+esm'),
+    import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm')
+  ]).then(([d3Module, topojson]) => {
+    const d3 = d3Module;
+    renderMap(d3, topojson);
+  }).catch(err => {
+    console.error("Erreur chargement carte:", err);
+    document.getElementById('map-loading').innerText = "Carte non disponible en mode hors-ligne.";
+  });
+}
+
+function renderMap(d3, topojson) {
+  const width = 800;
+  const height = 400;
+  
+  const svg = d3.select("#world-map-svg");
+  const tooltip = d3.select("#map-tooltip");
+  const tooltipContent = d3.select("#map-tooltip-content");
+  
+  // Projection
+  const projection = d3.geoEquirectangular()
+    .scale(130)
+    .translate([width / 2, height / 2 + 20]);
+    
+  const path = d3.geoPath().projection(projection);
+
+  // Diplomatic networks (Major)
+  const diplomaticNetworks = {
+    "Taiwan": "Taïwan — réseau diplomatique présent dans 82 pays", // Taiwan ISO: TWN
+    "Lithuania": "Lituanie — réseau diplomatique présent dans 37 pays", // LTU
+    "Latvia": "Lettonie — réseau diplomatique présent dans 37 pays", // LVA
+    "Haiti": "Haïti — réseau diplomatique présent dans 16 pays", // HTI
+    "Mongolia": "Mongolie — réseau diplomatique présent dans 12 pays", // MNG
+    "Moldova": "Moldavie — réseau diplomatique présent dans 11 pays", // MDA
+    
+    // Country names in topojson typically match english short names
+    "Taiwan, Province of China": "Taïwan — réseau diplomatique présent dans 82 pays",
+    "Republic of Moldova": "Moldavie — réseau diplomatique présent dans 11 pays",
+  };
+
+  // Other highlighted countries
+  const activeCountries = [
+    "Afghanistan", "Algeria", "Germany", "Saudi Arabia", "Armenia", "Austria", "Belgium", "Benin", 
+    "Bolivia", "Bosnia and Herzegovina", "Burkina Faso", "Cameroon", "Cape Verde", "Chad", "Republic of the Congo", 
+    "Democratic Republic of the Congo", "South Korea", "Djibouti", "United Arab Emirates", "Equatorial Guinea", 
+    "Spain", "Ethiopia", "United States of America", "France", "Gabon", "Georgia", "United Kingdom", 
+    "Greece", "Hungary", "India", "Indonesia", "Italy", "Jamaica", "Japan", "Kazakhstan", "Kenya", "Kuwait", 
+    "Laos", "Liberia", "Macedonia", "North Macedonia", "Mali", "Mauritania", "Uzbekistan", "Paraguay", "Peru", "Poland", 
+    "Portugal", "Czech Republic", "Russia", "Rwanda", "Solomon Islands", "Sweden", "Switzerland", "Suriname", 
+    "Tajikistan", "Togo", "Trinidad and Tobago", "Turkmenistan", "Turkey", "Tuvalu", "Ukraine", "Uruguay", "Venezuela",
+    // Including the diplomatic ones to color them too
+    "Taiwan", "Taiwan, Province of China", "Lithuania", "Latvia", "Haiti", "Mongolia", "Moldova", "Republic of Moldova"
+  ];
+
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(world => {
+    document.getElementById('map-loading').style.display = 'none';
+    
+    const countries = topojson.feature(world, world.objects.countries).features;
+    
+    // Create a group for countries
+    const g = svg.append("g");
+    
+    g.selectAll("path")
+      .data(countries)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("fill", d => {
+        const name = d.properties.name;
+        if (activeCountries.includes(name)) {
+          return "#0066B3"; // Corporate Blue
+        }
+        return "#F8FAFC"; // Light Gray
+      })
+      .attr("stroke", "#6B7280") // Slate Steel
+      .attr("stroke-width", 0.5)
+      .attr("class", d => {
+        const name = d.properties.name;
+        let classes = "transition-all duration-300 ";
+        if (activeCountries.includes(name)) {
+          classes += "cursor-pointer hover:fill-blue-400 highlighted-country opacity-0";
+        }
+        return classes;
+      })
+      .on("mouseover", function(event, d) {
+        const name = d.properties.name;
+        if (!activeCountries.includes(name)) return;
+        
+        // Highlight logic
+        d3.select(this).attr("stroke-width", 1.5).attr("stroke", "#1E293B");
+        
+        let tooltipText = name;
+        // Translate some common names back to French for tooltip if needed, or use the object
+        if (diplomaticNetworks[name]) {
+          tooltipText = diplomaticNetworks[name];
+        } else {
+          // Fallback translation map for tooltip
+          const frNames = {
+            "Germany": "Allemagne", "Algeria": "Algérie", "Saudi Arabia": "Arabie Saoudite",
+            "Armenia": "Arménie", "Austria": "Autriche", "Belgium": "Belgique", "Bolivia": "Bolivie",
+            "Bosnia and Herzegovina": "Bosnie-Herzégovine", "Cameroon": "Cameroun",
+            "Republic of the Congo": "Congo Brazzaville", "Democratic Republic of the Congo": "Congo Kinshasa",
+            "South Korea": "Corée du Sud", "United Arab Emirates": "Émirats Arabes Unis",
+            "Equatorial Guinea": "Guinée Équatoriale", "Spain": "Espagne", "Ethiopia": "Éthiopie",
+            "United States of America": "États-Unis", "United Kingdom": "Grande-Bretagne",
+            "Greece": "Grèce", "Hungary": "Hongrie", "Indonesia": "Indonésie", "Italy": "Italie",
+            "Jamaica": "Jamaïque", "Japan": "Japon", "Kuwait": "Koweït", "North Macedonia": "Macédoine",
+            "Mauritania": "Mauritanie", "Uzbekistan": "Ouzbékistan", "Peru": "Pérou",
+            "Poland": "Pologne", "Czech Republic": "République Tchèque", "Russia": "Russie",
+            "Solomon Islands": "Îles Salomon", "Sweden": "Suède", "Switzerland": "Suisse",
+            "Turkey": "Turquie", "Taiwan": "Taïwan", "Lithuania": "Lituanie", "Latvia": "Lettonie",
+            "Haiti": "Haïti", "Mongolia": "Mongolie", "Moldova": "Moldavie"
+          };
+          tooltipText = frNames[name] || name;
+        }
+
+        tooltipContent.text(tooltipText);
+        
+        // Positioning
+        const [x, y] = d3.pointer(event, svg.node());
+        tooltip.style("left", x + "px")
+               .style("top", y + "px")
+               .style("display", "block")
+               .style("opacity", 1);
+      })
+      .on("mouseout", function(event, d) {
+        const name = d.properties.name;
+        if (!activeCountries.includes(name)) return;
+        
+        d3.select(this).attr("stroke-width", 0.5).attr("stroke", "#6B7280");
+        tooltip.style("opacity", 0).style("display", "none");
+      });
+      
+      // Animate entry of highlighted countries
+      setTimeout(() => {
+        const highlighted = svg.selectAll(".highlighted-country");
+        highlighted.each(function(d, i) {
+          d3.select(this)
+            .transition()
+            .delay(i * 15) // Staggered entry
+            .duration(800)
+            .style("opacity", 1);
+        });
+      }, 500);
+  });
+}
+</script>

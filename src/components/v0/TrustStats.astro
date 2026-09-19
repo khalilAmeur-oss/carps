@@ -1,0 +1,40 @@
+---
+// Converted from TrustStats.jsx
+---
+) => observer.disconnect();
+  }, [target]);
+
+  return <span ref={elementRef}>{count}</span>;
+};
+
+const TrustStats = () => {
+  const { t } = useLanguage();
+
+  return (
+    <section class="trust-bar" aria-label="Key statistics">
+      <div class="trust-bar__container">
+        <div class="trust-bar__item">
+          <span class="trust-bar__number">1974</span>
+          <span class="trust-bar__label">[CONTENT]</span>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true" />
+        
+        <div class="trust-bar__item">
+          <span class="trust-bar__number"><AnimatedCounter target={110} />+</span>
+          <span class="trust-bar__label">[CONTENT]</span>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true" />
+        
+        <div class="trust-bar__item">
+          <span class="trust-bar__number"><AnimatedCounter target={500} /></span>
+          <span class="trust-bar__label">[CONTENT]</span>
+        </div>
+        <div class="trust-bar__divider" aria-hidden="true" />
+        
+        <div class="trust-bar__item">
+          <span class="trust-bar__number"><AnimatedCounter target={40} />+</span>
+          <span class="trust-bar__label">[CONTENT]</span>
+        </div>
+      </div>
+    </section>
+  

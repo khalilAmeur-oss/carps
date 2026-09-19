@@ -1,0 +1,79 @@
+---
+// Converted from WorldMap.jsx
+---
+
+    <div class="world-map-wrapper">
+      <ComposableMap
+        projection="geoMercator"
+        projectionConfig={{
+          scale: 120,
+          center: [0, 30] // Centers map slightly
+        }}
+        width={800}
+        height={400}
+        style={{ width: "100%", height: "auto" }}
+      >
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="rgba(255, 255, 255, 0.05)"
+                stroke="rgba(255, 255, 255, 0.1)"
+                strokeWidth={0.5}
+                style={{
+                  default: { outline: "none" },
+                  hover: { outline: "none", fill: "rgba(255, 255, 255, 0.1)" },
+                  pressed: { outline: "none" },
+                }}
+              />
+            ))
+          }
+        </Geographies>
+
+        {/* Lines from Paris */}
+        {locations.map((loc, i) => (
+          <Line
+            key={`line-${i}`}
+            from={PARIS_COORDS}
+            to={loc.coordinates}
+            stroke="var(--gold)"
+            strokeWidth={1}
+            strokeLinecap="round"
+            class="map-line-anim"
+            style={{
+              strokeDasharray: "4 4",
+              opacity: 0.4
+            }}
+          />
+        ))}
+
+        {/* Paris Origin */}
+        <Marker coordinates={PARIS_COORDS}>
+          <circle r={6} fill="var(--gold)" class="pulse-circle" />
+          <circle r={3} fill="#fff" />
+        </Marker>
+
+        {/* Destination Markers */}
+        {locations.map((loc, i) => (
+          <Marker 
+            key={`marker-${i}`} 
+            coordinates={loc.coordinates}
+            onMouseEnter={() => setTooltip(loc)}
+            onMouseLeave={() => setTooltip(null)}
+            style={{ cursor: "pointer" }}
+          >
+            <circle r={4} fill="var(--gold)" opacity={0.8} />
+            <circle r={8} fill="transparent" /> {/* larger invisible hit area */}
+          </Marker>
+        ))}
+      </ComposableMap>
+
+      {/* Tooltip */}
+      [CONTENT]</strong>
+          <div>[CONTENT] [CONTENT]</div>
+        </div>
+      )}
+    </div>
+  

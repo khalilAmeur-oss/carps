@@ -1,0 +1,24 @@
+---
+// Converted from DiplomaticNetworks.jsx
+---
+
+    <section class="networks" aria-labelledby="networks-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">[CONTENT]</span>
+          <h2 class="section-title section-title--light" id="networks-heading">
+            [CONTENT]
+          </h2>
+        </div>
+        <div class="networks__grid">
+          {countryStats.map((c) => (
+            <div class="networks__item" key={c.name}>
+              <span class="networks__country">{c.name}</span>
+              <span class="networks__number">{c.count}</span>
+              <span class="networks__unit">[CONTENT]</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  

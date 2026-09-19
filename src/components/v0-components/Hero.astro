@@ -1,0 +1,83 @@
+---
+export interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  bgImage?: string;
+  bgVideo?: string;
+  primaryCtaText: string;
+  primaryCtaLink: string;
+  secondaryText: string;
+}
+
+const { eyebrow, title, subtitle, description, bgImage, bgVideo, primaryCtaText, primaryCtaLink, secondaryText } = Astro.props;
+---
+
+<section class="hero reveal revealed" id="hero" aria-labelledby="hero-heading">
+  <div class="hero__bg" aria-hidden="true" style="position: absolute; inset: 0; overflow: hidden;">
+    {bgVideo ? (
+      <video 
+        src={bgVideo}
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        preload="metadata"
+        class="hero__bg-video" 
+        style="width: 100%; height: 100%; object-fit: cover;"
+      ></video>
+    ) : (
+      <img src={bgImage} alt="" style="width: 100%; height: 100%; object-fit: cover;" />
+    )}
+    <!-- Overlay to ensure text readability -->
+    <div style="position: absolute; inset: 0; background-color: var(--primary-navy); opacity: 0.8; mix-blend-mode: multiply;"></div>
+    <div style="position: absolute; inset: 0; background-color: rgba(30, 41, 59, 0.4);"></div>
+  </div>
+  
+  <div class="hero__container relative z-10 container">
+    <div class="hero__content">
+      <span class="hero__eyebrow text-gold uppercase tracking-widest text-sm font-bold mb-4 block">{eyebrow}</span>
+      <h1 class="hero__title text-white text-5xl md:text-6xl font-heading font-bold mb-4" id="hero-heading" set:html={title}></h1>
+      {subtitle && <p class="hero__subtitle text-xl text-blue-100 mb-6 font-medium">{subtitle}</p>}
+      <p class="hero__description text-gray-300 text-lg mb-8 max-w-2xl">{description}</p>
+      
+      <div class="hero__stats flex gap-8 mb-10">
+        <div class="hero__stat">
+          <span class="hero__stat-number block text-3xl text-gold font-heading font-bold animate-counter" data-target="50" data-suffix="+">0</span>
+          <span class="hero__stat-label text-sm text-gray-400 uppercase">Ans d'expérience</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-number block text-3xl text-gold font-heading font-bold animate-counter" data-target="30" data-suffix="+">0</span>
+          <span class="hero__stat-label text-sm text-gray-400 uppercase">Partenaires</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-number block text-3xl text-gold font-heading font-bold animate-counter" data-target="2000" data-suffix="+">0</span>
+          <span class="hero__stat-label text-sm text-gray-400 uppercase">Clients</span>
+        </div>
+      </div>
+      
+      <div class="hero__actions flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <a href={primaryCtaLink} class="btn btn--gold btn--lg inline-block px-8 py-4 rounded-md font-bold transition-transform hover:-translate-y-1">{primaryCtaText} <span aria-hidden="true">→</span></a>
+        <div class="hero__secondary">
+          <span class="hero__secondary-text block text-gray-400 text-sm">{secondaryText}</span>
+          <a href="tel:+33601785792" class="hero__phone-link text-white font-bold text-lg hover:text-gold transition-colors">+33 6 01 78 57 92</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- On ne remet pas QuoteForm ici pour éviter la duplication de logique, 
+         ou on peut l'intégrer si c'est pour l'accueil -->
+  </div>
+</section>
+
+<style>
+/* Adjust container logic for Astro */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+}
+</style>

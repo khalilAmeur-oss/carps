@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+<Layout title={`${post.data.title} | CARPS IARD`} description={post.data.description}>
+  <article class="max-w-3xl mx-auto px-4 py-20">
+    <h1 class="text-4xl font-heading font-bold mb-4 text-corporate-dark">{post.data.title}</h1>
+    <p class="text-corporate-gray mb-10">{post.data.date}</p>
+    <div class="prose prose-lg prose-blue max-w-none text-gray-700">
+      <Content />
+    </div>
+  </article>
+</Layout>

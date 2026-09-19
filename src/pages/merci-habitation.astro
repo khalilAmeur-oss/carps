@@ -1,0 +1,13 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+---
+<LandingLayout title="Merci pour votre demande" description="Votre demande de devis a bien été envoyée.">
+  <div class="w-full max-w-lg bg-white p-12 rounded-lg shadow-lg border border-gray-100 text-center">
+    <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+      <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+    </div>
+    <h1 class="text-3xl font-heading font-bold text-corporate-dark mb-4">Merci !</h1>
+    <p class="text-corporate-gray mb-8 text-lg">Votre demande de devis a bien été prise en compte. Un conseiller va vous contacter sous 24h.</p>
+    <a href="/" class="btn-primary w-full">Retour à l'accueil</a>
+  </div>
+</LandingLayout>

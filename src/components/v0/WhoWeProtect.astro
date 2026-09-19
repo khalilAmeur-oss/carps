@@ -1,0 +1,32 @@
+---
+// Converted from WhoWeProtect.jsx
+---
+
+    <section class='audience' id='who-we-protect' aria-labelledby='audience-heading'>
+      <div class='container'>
+        <div class='section-header'>
+          <span class='section-label'>[CONTENT]</span>
+          <h2 class='section-title' id='audience-heading'>[CONTENT]</h2>
+          <p class='section-subtitle'>[CONTENT]</p>
+        </div>
+        <div class='audience__grid'>
+          [CONTENT]>
+              <div class='audience-card__icon' aria-hidden='true'>
+                {icons[i]}
+              </div>
+              <h3 class='audience-card__title'>{card.title}</h3>
+              <p class='audience-card__desc'>{card.desc}</p>
+              <ul class='audience-card__list'>
+                {card.features.map((f, j) => <li key={j}>{f}</li>)}
+              </ul>
+              <a href='#contact' class='audience-card__cta'>{card.cta} <span aria-hidden='true'>→</span></a>
+            </div>
+          ))}
+        </div>
+        {/* Section image */}
+        <div class='audience__image-wrapper' style={{marginTop: '48px', borderRadius: '12px', overflow: 'hidden', maxHeight: '340px'}}>
+          <img src={sectionImage} alt='International flags displayed on a European building facade' loading='lazy' style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+        </div>
+      </div>
+    </section>
+  

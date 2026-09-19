@@ -1,0 +1,43 @@
+---
+// Converted from ClaimsProcess.jsx
+---
+
+    <section class='claims' aria-labelledby='claims-heading'>
+      <div class='container'>
+        <div class='section-header'>
+          <span class='section-label'>[CONTENT]</span>
+          <h2 class='section-title' id='claims-heading'>[CONTENT]</h2>
+        </div>
+        <div class='claims__steps'>
+          [CONTENT]>
+              {i > 0 && <div class='claims__connector' aria-hidden='true' />}
+              <div class='claims__step'>
+                <div class='claims__step-number' aria-hidden='true'>{step.num}</div>
+                <h3 class='claims__step-title'>{step.title}</h3>
+                <p class='claims__step-text'>{step.text}</p>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+        <div class='claims__highlight' style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: '32px',
+          borderRadius: '12px',
+          marginTop: '48px'
+        }}>
+          <div style={{position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', zIndex: 0}}></div>
+          <div class='claims__highlight-icon' aria-hidden='true' style={{position: 'relative', zIndex: 1, marginBottom: '16px'}}>
+            <svg width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='#C9A45C' strokeWidth='1.5'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>
+          </div>
+          <div class='claims__highlight-content' style={{position: 'relative', zIndex: 1}}>
+            <h3 class='claims__highlight-title' style={{color: '#fff', fontSize: '1.25rem', marginBottom: '8px'}}>[CONTENT]</h3>
+            <p class='claims__highlight-text' style={{color: '#f0f0f0', margin: 0}}>[CONTENT]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  

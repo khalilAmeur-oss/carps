@@ -1,0 +1,24 @@
+---
+// Converted from LanguageSwitcher.jsx
+---
+
+    <div class="lang-switcher" role="group" aria-label="Language selection">
+      <button 
+        class={`lang-switcher__btn ${language === 'en' ? 'active' : ''}`} 
+        onClick={() => setLanguage('en')} 
+        aria-pressed={language === 'en'} 
+        aria-label=[CONTENT]
+      >
+        <img src={flagEn} alt="" width="18" height="13" class="lang-switcher__flag" /> EN
+      </button>
+      <span class="lang-switcher__sep">|</span>
+      <button 
+        class={`lang-switcher__btn ${language === 'fr' ? 'active' : ''}`} 
+        onClick={() => setLanguage('fr')} 
+        aria-pressed={language === 'fr'} 
+        aria-label=[CONTENT]
+      >
+        <img src={flagFr} alt="" width="18" height="13" class="lang-switcher__flag" /> FR
+      </button>
+    </div>
+  

@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+---
+<Layout title="Actualités | CARPS IARD">
+  <section class="section-padding bg-corporate-light min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-4xl font-heading font-bold mb-12 text-corporate-dark">Actualités et Conseils</h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {posts.map(post => (
+          <a href={/actualites/ + post.slug} class="bg-white p-6 rounded-md shadow-sm hover:shadow-md transition border border-gray-100">
+            <h2 class="text-xl font-bold mb-2 text-corporate-dark">{post.data.title}</h2>
+            <p class="text-corporate-gray text-sm mb-4">{post.data.date}</p>
+            <p class="text-gray-600">{post.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

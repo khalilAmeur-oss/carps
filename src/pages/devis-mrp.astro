@@ -1,0 +1,53 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+---
+
+<LandingLayout title="Devis Multirisque Professionnelle (MRP) | CARPS INTERNATIONAL IARD" description="Demandez votre devis gratuit pour votre Multirisque Professionnelle (MRP).">
+  <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+    <h1 class="text-3xl font-heading font-bold text-center text-corporate-dark mb-2">Devis Multirisque Professionnelle (MRP)</h1>
+    <p class="text-center text-corporate-gray mb-8">Remplissez ce formulaire pour recevoir une étude personnalisée de la part de nos conseillers.</p>
+    
+    <form action="/merci-mrp" method="GET" class="space-y-6" id="lead-form-auto">
+      <!-- Form submission logic would normally go to a serverless function -->
+      
+      <div class="hidden">
+        <!-- Honeypot -->
+        <label>Ne pas remplir <input type="text" name="honeypot" /></label>
+      </div>
+
+      <div>
+        <label for="name" class="block text-sm font-medium text-corporate-dark mb-1">Prénom & Nom</label>
+        <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-corporate-light border border-gray-200 rounded-md focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all" placeholder="Jean Dupont" />
+      </div>
+
+      <div>
+        <label for="phone" class="block text-sm font-medium text-corporate-dark mb-1">Téléphone / WhatsApp</label>
+        <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 bg-corporate-light border border-gray-200 rounded-md focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all" placeholder="06 00 00 00 00" />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-corporate-dark mb-1">Email</label>
+        <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-corporate-light border border-gray-200 rounded-md focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all" placeholder="jean.dupont@email.com" />
+      </div>
+      
+      <div>
+        <label for="message" class="block text-sm font-medium text-corporate-dark mb-1">Informations complémentaires (Optionnel)</label>
+        <textarea id="message" name="message" rows="3" class="w-full px-4 py-3 bg-corporate-light border border-gray-200 rounded-md focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all" placeholder="Précisez votre besoin (ex: jeune conducteur, malussé...)"></textarea>
+      </div>
+
+      <div class="flex items-start">
+        <div class="flex items-center h-5">
+          <input id="rgpd" name="rgpd" type="checkbox" required class="w-4 h-4 text-corporate-blue border-gray-300 rounded focus:ring-corporate-blue" />
+        </div>
+        <div class="ml-3 text-sm">
+          <label for="rgpd" class="text-corporate-gray">J'accepte que mes données soient traitées conformément à la <a href="/politique-de-confidentialite" class="text-corporate-blue underline hover:text-blue-800">politique de confidentialité</a>.</label>
+        </div>
+      </div>
+
+      <button type="submit" class="w-full btn-primary text-lg font-bold py-4">Demander mon devis</button>
+      
+      <p class="text-xs text-center text-gray-400 mt-4">* Sous réserve d'acceptation du dossier par la compagnie d'assurance partenaire.</p>
+    </form>
+  </div>
+</LandingLayout>
+

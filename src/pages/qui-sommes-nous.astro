@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WorldMap from '../components/WorldMap.astro';
+---
+<Layout title="Qui sommes-nous | CARPS IARD">
+  <section class="section-padding max-w-4xl mx-auto px-4">
+    <h1 class="text-4xl font-heading font-bold mb-8 text-corporate-dark">L'expertise CARPS depuis 1974</h1>
+    <div class="prose prose-lg text-gray-700">
+      <p>Depuis plus de 50 ans, CARPS INTERNATIONAL IARD accompagne les particuliers et professionnels dans la gestion de leurs risques.</p>
+      <p>Notre indépendance nous permet de comparer et sélectionner les meilleures offres parmi nos nombreux partenaires assureurs. Nous ne vendons pas un produit "maison", nous trouvons la solution adaptée à VOS besoins.</p>
+      
+      <div class="my-8">
+        <a href="/contact" class="btn-primary no-underline text-white">Obtenir un devis gratuit</a>
+      </div>
+
+      <h2 class="text-2xl font-heading font-bold mt-8 mb-4">Nos valeurs</h2>
+      <ul class="list-disc pl-6 mb-8">
+        <li><strong>Transparence :</strong> Des contrats clairs, sans mauvaises surprises.</li>
+        <li><strong>Accompagnement humain :</strong> Une agence physique à Paris et des conseillers joignables sur WhatsApp ou par téléphone.</li>
+        <li><strong>Réactivité :</strong> Des attestations délivrées sous 24 à 48h.</li>
+      </ul>
+      <p>ORIAS : [À COMPLÉTER]</p>
+      
+      <div class="mt-12 text-center border-t border-gray-200 pt-8">
+        <p class="mb-6 font-bold text-corporate-dark">Prêt à comparer vos contrats ?</p>
+        <a href="/contact" class="btn-primary no-underline text-white">Demander une étude personnalisée</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-corporate-dark text-white py-20 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-heading font-bold mb-4">Le groupe CARPS, une présence mondiale depuis 1974</h2>
+        <p class="text-gray-300 max-w-3xl mx-auto text-lg">
+          La maison-mère CARPS INTERNATIONAL opère dans plus de 100 pays et assure les réseaux diplomatiques de plus de 40 nations. 
+          Cette envergure internationale est le socle de solidité qui nous permet de vous protéger efficacement en IARD (Auto, Habitation, MRP).
+        </p>
+      </div>
+      
+      <WorldMap />
+
+      <div class="mt-8 text-center text-sm text-gray-400">
+        <p>Survolez les pays en bleu pour découvrir notre couverture internationale.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

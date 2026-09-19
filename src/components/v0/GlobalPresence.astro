@@ -1,0 +1,31 @@
+---
+// Converted from GlobalPresence.jsx
+---
+
+    <section class='global-presence' id='global-presence' aria-labelledby='global-heading'>
+      <div class='container'>
+        <div class='section-header'>
+          <span class='section-label'>[CONTENT]</span>
+          <h2 class='section-title section-title--light' id='global-heading'>[CONTENT]</h2>
+          <p class='section-subtitle section-subtitle--light'>[CONTENT]</p>
+        </div>
+        
+        <div class='global-presence__map-wrapper'>
+          <WorldMap />
+        </div>
+
+        {/* Existing stats are now handled by map interaction mostly, but if we need to keep them, we can hide them on desktop or keep them. The prompt said: "Place the new map below this content, using the available empty space intelligently." "Do NOT replace the existing Global Presence text." Let's keep the country stats grid if it existed, but usually the map acts as the visualization of it. 
+        Actually, the prompt said: "DO NOT replace the existing Global Presence text... Place the new map below this content, using the available empty space intelligently."
+        Let's put the map above the stats or replace the static SVG. */ }
+        <div class='global-presence__stats' style={{ marginTop: '32px' }}>
+          {countryStats.map(c => (
+            <div class='country-stat' key={c.name}>
+              <span class='country-stat__name'>{c.name}</span>
+              <span class='country-stat__number'>{c.count} <span class='country-stat__unit'>[CONTENT]</span></span>
+            </div>
+          ))}
+        </div>
+        <p class='global-presence__note'>[CONTENT]</p>
+      </div>
+    </section>
+  
